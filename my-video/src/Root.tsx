@@ -7,6 +7,10 @@ import "./agency/lib/fonts";
 import "./offer/fonts";
 import "./cafe/fonts";
 import "./vocab/fonts";
+import "./price/fonts";
+import "./smart/fonts";
+import "./grids/fonts";
+import "./message/fonts";
 import { Composition, Folder } from "remotion";
 import { BrandingCarousel } from "./brand/Video";
 import { ExpectationsShot } from "./brand/scenes/ExpectationsShot";
@@ -43,6 +47,24 @@ import { S5Interior } from "./cafe/scenes/S5Interior";
 import { S6Table } from "./cafe/scenes/S6Table";
 import { S7Return } from "./cafe/scenes/S7Return";
 import { S8Close } from "./cafe/scenes/S8Close";
+import { GridsOpener, GridsShot } from "./grids/GridsOpener";
+import {
+  DURATION as GR_DURATION,
+  FPS as GR_FPS,
+  HEIGHT as GR_HEIGHT,
+  SHOTS as GR_SHOTS,
+  shotFrames as grShotFrames,
+  WIDTH as GR_WIDTH,
+} from "./grids/lib/tokens";
+import { MESSAGE_SCENES, TheMessage } from "./message/TheMessage";
+import {
+  DURATION as MSG_DURATION,
+  FPS as MSG_FPS,
+  HEIGHT as MSG_HEIGHT,
+  SHOTS as MSG_SHOTS,
+  shotFrames as msgShotFrames,
+  WIDTH as MSG_WIDTH,
+} from "./message/lib/tokens";
 import { HundredDays } from "./HundredDays";
 import {
   VisualVocabulary,
@@ -56,6 +78,24 @@ import {
   shotFrames as vocabShotFrames,
   WIDTH as VOCAB_WIDTH,
 } from "./vocab/lib/tokens";
+import { SmartMoves, SMART_SCENES } from "./smart/SmartMoves";
+import {
+  DURATION as SM_DURATION,
+  FPS as SM_FPS,
+  HEIGHT as SM_HEIGHT,
+  SHOTS as SM_SHOTS,
+  shotFrames as smartShotFrames,
+  WIDTH as SM_WIDTH,
+} from "./smart/lib/tokens";
+import { PriceFraming, PRICE_SHOT_PREVIEWS } from "./price/PriceFraming";
+import {
+  DURATION as PRICE_DURATION,
+  FPS as PRICE_FPS,
+  HEIGHT as PRICE_HEIGHT,
+  SHOTS as PRICE_SHOTS,
+  shotFrames as priceShotFrames,
+  WIDTH as PRICE_WIDTH,
+} from "./price/lib/tokens";
 import { Offer } from "./offer/Offer";
 import {
   DURATION as OFFER_DURATION,
@@ -113,6 +153,99 @@ const OFFER_SCENES = [
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      <Composition
+        id="TheMessage"
+        component={TheMessage}
+        durationInFrames={MSG_DURATION}
+        fps={MSG_FPS}
+        width={MSG_WIDTH}
+        height={MSG_HEIGHT}
+      />
+
+      <Folder name="Message-shots">
+        {MSG_SHOTS.map((shot, i) => (
+          <Composition
+            key={shot.id}
+            id={shot.id}
+            component={MESSAGE_SCENES[i]}
+            durationInFrames={msgShotFrames(shot.from, shot.to)}
+            fps={MSG_FPS}
+            width={MSG_WIDTH}
+            height={MSG_HEIGHT}
+          />
+        ))}
+      </Folder>
+
+      <Composition
+        id="PriceFraming"
+        component={PriceFraming}
+        durationInFrames={PRICE_DURATION}
+        fps={PRICE_FPS}
+        width={PRICE_WIDTH}
+        height={PRICE_HEIGHT}
+      />
+
+      <Folder name="Price-shots">
+        {PRICE_SHOTS.map((shot, i) => (
+          <Composition
+            key={shot.id}
+            id={shot.id}
+            component={PRICE_SHOT_PREVIEWS[i]}
+            durationInFrames={priceShotFrames(i)}
+            fps={PRICE_FPS}
+            width={PRICE_WIDTH}
+            height={PRICE_HEIGHT}
+          />
+        ))}
+      </Folder>
+
+      <Composition
+        id="Grids"
+        component={GridsOpener}
+        durationInFrames={GR_DURATION}
+        fps={GR_FPS}
+        width={GR_WIDTH}
+        height={GR_HEIGHT}
+      />
+
+      <Folder name="Grids-shots">
+        {GR_SHOTS.map((shot) => (
+          <Composition
+            key={shot.id}
+            id={shot.id}
+            component={GridsShot}
+            defaultProps={{ from: shot.from }}
+            durationInFrames={grShotFrames(shot.from, shot.to)}
+            fps={GR_FPS}
+            width={GR_WIDTH}
+            height={GR_HEIGHT}
+          />
+        ))}
+      </Folder>
+
+      <Composition
+        id="SmartMoves"
+        component={SmartMoves}
+        durationInFrames={SM_DURATION}
+        fps={SM_FPS}
+        width={SM_WIDTH}
+        height={SM_HEIGHT}
+      />
+
+      <Folder name="Smart-shots">
+        {SM_SHOTS.map((shot, i) => (
+          <Composition
+            key={shot.id}
+            id={shot.id}
+            component={SMART_SCENES[i]}
+            durationInFrames={smartShotFrames(shot.from, shot.to)}
+            fps={SM_FPS}
+            width={SM_WIDTH}
+            height={SM_HEIGHT}
+          />
+        ))}
+      </Folder>
+
       <Composition
         id="VisualVocabulary"
         component={VisualVocabulary}

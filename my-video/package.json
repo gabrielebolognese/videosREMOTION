@@ -30,7 +30,11 @@
     "lint": "eslint src && tsc",
     "render": "remotion render HundredDays out/HundredDays.mp4 && node scripts/fix-audio-sync.mjs out/HundredDays.mp4",
     "render:dayzero": "remotion render DayZero out/DayZero.mp4 && node scripts/fix-audio-sync.mjs out/DayZero.mp4",
-    "render:agency": "remotion render AgencyExplainer out/AgencyExplainer.mp4 --muted"
+    "render:agency": "remotion render AgencyExplainer out/AgencyExplainer.mp4 --muted",
+    "render:smart": "remotion render SmartMoves out/SmartMoves.mp4 --muted",
+    "render:grids": "remotion render Grids out/Grids.mp4 --muted",
+    "render:message": "remotion render TheMessage out/TheMessage.mp4 --muted",
+    "render:price": "remotion render PriceFraming out/PriceFraming.mp4 --muted"
   },
   "sideEffects": [
     "*.css",
@@ -41,6 +45,10 @@
     "./src/offer/fonts.ts",
     "./src/cafe/fonts.ts",
     "./src/vocab/fonts.ts",
-    "./src/agency/lib/fonts.ts"
+    "./src/smart/fonts.ts",
+    "./src/grids/fonts.ts",
+    "./src/message/fonts.ts",
+    "./src/agency/lib/fonts.ts",
+    "./src/price/fonts.ts"
   ]
 }
